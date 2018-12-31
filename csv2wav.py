@@ -5,7 +5,9 @@ import sys
 import numpy
 import scipy.io.wavfile
 
-data_raw, none = numpy.loadtxt(open(sys.argv[1]), delimiter=',', skiprows=5, unpack=True)
+from arr2wav import arr2wav
+
+(foo, data_raw) = numpy.loadtxt(open(sys.argv[1]), delimiter=',', skiprows=5, unpack=True)
 print(data_raw[:5])
 
 mean_raw = numpy.mean(data_raw)
@@ -74,4 +76,6 @@ rng_norm3 = max_norm3 - min_norm3
 print('range_norm3: {}'.format(rng_norm3))
 
 scipy.io.wavfile.write(sys.argv[2], 100*1000, data_norm3)
+
+arr2wav(data_raw, 'foo.wav', 100*1000)
 
